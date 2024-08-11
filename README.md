@@ -1,2 +1,2 @@
 # laravel-blog
-Simple Blog on golang
+Simple Blog on laravel
