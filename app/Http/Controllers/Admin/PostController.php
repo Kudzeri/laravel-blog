@@ -13,7 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return 'Hello World';
+        return view('admin.posts.index', ['page' => 'Posts']);
     }
 
     /**
