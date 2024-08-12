@@ -13,7 +13,10 @@ class TagController extends Controller
      */
     public function index()
     {
-        return 'Hello World';
+        $tags = Tag::OrderBy('created_at', 'asc')->paginate(5);
+
+
+        return view('admin.tags.index', compact('tags'));
     }
 
     /**
