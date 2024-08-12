@@ -13,7 +13,7 @@
             <form action="{{ $post->exists ? route('admin.posts.update', $post) : route('admin.posts.store') }}" method="post"> <!--begin::Body-->
                 <div class="card-body">
                     <div class="mb-3"> <label for="exampleInputPassword1" class="form-label">Title</label> <input value="{{ old('name', $post->title) }}"  name="title" type="text" class="form-control"> </div>
-                    <div class="input-group"> <span class="input-group-text">Content</span> <textarea name="content" class="form-control" aria-label="With textarea"></textarea> </div>
+                    <div class="input-group"> <span class="input-group-text">Content</span> <textarea name="content" class="form-control" aria-label="With textarea">{{ old('name', $post->content) }}</textarea> </div>
                     @csrf
                     @if($post->exists)
                         @method('PUT')
