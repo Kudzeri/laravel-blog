@@ -1,4 +1,25 @@
 @charset "UTF-8";
+/* resources/css/app.css */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-link {
+    padding: 5px 10px; /* Уменьшите размер кнопок */
+    font-size: 14px; /* Уменьшите размер шрифта */
+}
+/* resources/css/app.css */
+.pagination .page-item .page-link {
+    padding: 5px 8px; /* Уменьшите размеры кнопок */
+    font-size: 14px; /* Уменьшите размер шрифта */
+}
+
 /*!
  *   AdminLTE v4.0.0-beta1
  *   Author: Colorlib
