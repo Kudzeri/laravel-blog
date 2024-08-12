@@ -27,7 +27,7 @@
                         <th style="width: 10px">#</th>
                         <th>Title</th>
                         <th>Content</th>
-                        <th>Created at</th>
+                        <th style="width: 10px">Created at</th>
                         <th class="col-2">Links</th>
                     </tr>
                     </thead>
