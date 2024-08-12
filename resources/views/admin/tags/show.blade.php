@@ -27,11 +27,12 @@
                 </table>
             </div> <!-- /.card-body -->
             <div class="col-12">
-                <a class="btn btn-warning mb-2 mx-auto col-12" href="{{ route('admin.tags.index') }}">Back</a>
+                <a class="btn btn-warning mb-2 mx-auto col-12" href="{{ route('admin.tags.edit', $tag) }}">Edit</a>
                 <form action="{{route('admin.tags.destroy', $tag)}}" method="post" class="col-12">
                     @method('DELETE')
                     @csrf
                     <button class="btn btn-danger px-5 col-12" type="submit">Delete</button></form>
+                <a class="btn btn-primary mt-2 mx-auto col-12" href="{{ route('admin.tags.index') }}">Back</a>
             </div>
         </div>
 </x-admin>
