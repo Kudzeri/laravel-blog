@@ -13,7 +13,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('admin.posts.index', ['page' => 'Posts']);
+        $posts = Post::OrderBy('created_at', 'asc')->paginate(5);
+
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
