@@ -34,7 +34,7 @@
                         @foreach($categories as $category)
                             <tr class="align-middle">
                             <td>{{ ($categories->currentPage() - 1) * $categories->perPage() + $loop->iteration }}</td>
-                            <td>{{$category->name}}</td>
+                            <td>{{ucfirst($category->name)}}</td>
                             <td>{{$category->posts()->count()}}</td>
                             <td class="col-2">
                                 <a class="btn btn-success mb-2 px-5" href="{{ route('admin.categories.show', $category) }}">Show</a>
