@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\StoreTagRequest;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -24,15 +25,21 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        $tag = new Tag();
+
+        return view('admin.tags.form', compact('tag'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTagRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        Tag::create($validated);
+
+        return redirect()->route('admin.tags.index');
     }
 
     /**

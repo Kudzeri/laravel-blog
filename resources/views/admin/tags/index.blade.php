@@ -32,8 +32,8 @@
                     <tbody>
                     @foreach($tags as $tag)
                         <tr class="align-middle">
-                            <td>{{ ($tag->currentPage() - 1) * $tag->perPage() + $loop->iteration }}</td>
-                            <td>{{$tag->name}}</td>
+                            <td>{{ ($tags->currentPage() - 1) * $tags->perPage() + $loop->iteration }}</td>
+                            <td>{{ ucfirst($tag->name) }}</td>
                             <td class="col-2">
                                 <a class="btn btn-success mb-2 px-5" href="{{ route('admin.tags.show', $tag) }}">Show</a>
                                 <a class="btn btn-warning mb-2 px-5" href="{{ route('admin.tags.edit', $tag) }}">Edit</a>
