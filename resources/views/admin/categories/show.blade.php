@@ -30,6 +30,10 @@
             </div> <!-- /.card-body -->
             <div class="col-12">
                 <a class="btn btn-warning mb-2 mx-auto col-12" href="{{ route('admin.categories.index') }}">Back</a>
+                <form action="{{route('admin.categories.destroy', $category)}}" method="post" class="col-12">
+                    @method('DELETE')
+                    @csrf
+                    <button class="btn btn-danger px-5 col-12" type="submit">Delete</button></form>
             </div>
         </div>
 </x-admin>
