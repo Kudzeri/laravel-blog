@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\TagController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\{PostController, CategoryController, TagController, AdminController};
+use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\TagController as AdminTagController;
+use App\Http\Middleware\CheckRoleMiddleware; //Add to Kernel RoutesMiddleware
 
 Auth::routes();
 
@@ -12,10 +13,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/', [PostController::class, 'index'])->name('index');
 
-Route::resource('posts', PostController::class)->only(['index', 'show']);
-Route::resource('categories', CategoryController::class)->only(['index', 'show']);
-Route::resource('tags', TagController::class)->only(['index', 'show']);
-
-Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, "index"])->name('admin.index');
+    Route::resource('posts', AdminPostController::class)->names('admin.posts');
+    Route::resource('categories', AdminCategoryController::class)->names('admin.categories');
+    Route::resource('tags', AdminTagController::class)->names('admin.tags');
 });
