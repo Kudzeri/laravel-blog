@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\StoreTagRequest;
+use App\Http\Requests\UpdateTagRequest;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -39,7 +40,7 @@ class TagController extends Controller
 
         Tag::create($validated);
 
-        return redirect()->route('admin.tags.index');
+        return redirect()->route('admin.tags.index')->with('success', 'Tag created successfully');
     }
 
     /**
@@ -55,15 +56,18 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('admin.tags.form', compact('tag'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tag $tag)
+    public function update(UpdateTagRequest $request, Tag $tag)
     {
-        //
+        $validated = $request->validated();
+
+        $tag->update($validated);
+        return redirect()->route('admin.tags.index')->with('success', 'Tag updated successfully');
     }
 
     /**
@@ -71,6 +75,8 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        Tag::destroy($tag->id);
+
+        return redirect()->route('admin.tags.index')->with('danger', 'Tag deleted successfully');
     }
 }
