@@ -8,7 +8,7 @@
         </div>
         <div class="card mb-4">
             <div class="card-header">
-                <h3 class="card-title">Categories</h3>
+                <h3 class="card-title">Category "{{$category->name}}"</h3>
             </div> <!-- /.card-header -->
             <div class="card-body">
                 <table class="table table-bordered">
@@ -17,28 +17,19 @@
                         <th style="width: 10px">#</th>
                         <th>Name</th>
                         <th style="width: 10px">Posts</th>
-                        <th style="width: 10px"">Links</th>
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($categories as $category)
-                            <tr class="align-middle">
+                        <tr class="align-middle">
                             <td>{{$category->id}}</td>
                             <td>{{$category->name}}</td>
                             <td>{{$category->posts()->count()}}</td>
-                            <td>
-                                <a class="btn btn-success mb-2 mx-auto col-12" href="{{ route('admin.categories.show', $category) }}">Show</a>
-                            </td>
-                            </tr>
-                        @endforeach
+                        </tr>
                     </tbody>
                 </table>
             </div> <!-- /.card-body -->
-            <div class="card-footer clearfix">
-                {{ $categories->links('components.pagination') }}
-            </div>
             <div class="col-12">
-                <a class="btn btn-warning mb-2 mx-auto col-12" href="{{ route('admin.index') }}">Back</a>
+                <a class="btn btn-warning mb-2 mx-auto col-12" href="{{ route('admin.categories.index') }}">Back</a>
             </div>
         </div>
 </x-admin>
