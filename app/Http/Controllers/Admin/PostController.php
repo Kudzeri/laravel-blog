@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -26,8 +27,8 @@ class PostController extends Controller
     public function create()
     {
         $post = new Post();
-
-        return view('admin.posts.form', compact('post'));
+        $categories = Category::OrderBy('name', 'asc')->get();
+        return view('admin.posts.form', compact('post','categories'));
     }
 
     /**
@@ -55,7 +56,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.form', compact('post'));
+        $categories = Category::OrderBy('name', 'asc')->get();
+
+        return view('admin.posts.form', compact('post', 'categories'));
     }
 
     /**

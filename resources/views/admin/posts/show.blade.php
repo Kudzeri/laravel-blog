@@ -16,6 +16,7 @@
                     <tr>
                         <th>Title</th>
                         <th>Content</th>
+                        <th>Category</th>
                         <th>Created at</th>
                     </tr>
                     </thead>
@@ -23,6 +24,7 @@
                     <tr class="align-middle">
                         <td>{{ucfirst($post->title)}}</td>
                         <td>{{Str::limit($post->content, 60)}}</td>
+                        <td>{{ $post->category ? $post->category->name : 'No Category' }}</td>
                         <td>{{ $post->createdDate() }}</td>
                     </tr>
                     </tbody>

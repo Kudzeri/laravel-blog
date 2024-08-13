@@ -14,6 +14,19 @@
                 <div class="card-body">
                     <div class="mb-3"> <label for="exampleInputPassword1" class="form-label">Title</label> <input value="{{ old('name', $post->title) }}"  name="title" type="text" class="form-control"> </div>
                     <div class="input-group"> <span class="input-group-text">Content</span> <textarea name="content" class="form-control" aria-label="With textarea">{{ old('name', $post->content) }}</textarea> </div>
+                    <div class="col-md-6"> <label for="validationCustom04" class="form-label">Category</label> <select name="category_id"  class="form-select">
+                            <option value="">No Category</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}"
+                                    {{ old('category_id', optional($post->category)->id) == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a valid state.
+                        </div>
+                    </div>
                     @csrf
                     @if($post->exists)
                         @method('PUT')
