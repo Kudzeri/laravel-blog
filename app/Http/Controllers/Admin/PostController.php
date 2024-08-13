@@ -7,6 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -27,8 +28,9 @@ class PostController extends Controller
     public function create()
     {
         $post = new Post();
+        $tags = Tag::all();
         $categories = Category::OrderBy('name', 'asc')->get();
-        return view('admin.posts.form', compact('post','categories'));
+        return view('admin.posts.form', compact('post','categories', 'tags'));
     }
 
     /**
@@ -38,7 +40,11 @@ class PostController extends Controller
     {
         $validated = $request->validated();
 
-        Post::create($validated);
+        $post = Post::create($validated);
+
+        if (isset($validated['tags'])) {
+            $post->tags()->sync($validated['tags']);
+        }
 
         return redirect()->route('admin.posts.index')->with('success', 'Post created successfully.');
     }
@@ -56,9 +62,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $tags = Tag::all();
         $categories = Category::OrderBy('name', 'asc')->get();
 
-        return view('admin.posts.form', compact('post', 'categories'));
+        return view('admin.posts.form', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -69,6 +76,7 @@ class PostController extends Controller
         $validated = $request->validated();
 
         $post->update($validated);
+        $post->tags()->sync($request->input('tags', []));
 
         return redirect()->route('admin.posts.index')->with('success', 'Post updated successfully.');
     }

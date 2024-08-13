@@ -24,8 +24,18 @@
                             @endforeach
                         </select>
                         <div class="invalid-feedback">
-                            Please select a valid state.
+                            Please select a valid category.
                         </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tags" class="form-label">Tags</label>
+                        <select multiple class="form-select" id="tags" name="tags[]">
+                            @foreach ($tags as $tag)
+                                <option value="{{ $tag->id }}" {{ in_array($tag->id, old('tags', $post->tags->pluck('id')->toArray())) ? 'selected' : '' }}>
+                                    {{ $tag->name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     @csrf
                     @if($post->exists)

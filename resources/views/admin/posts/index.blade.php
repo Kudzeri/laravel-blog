@@ -28,6 +28,7 @@
                         <th>Title</th>
                         <th>Content</th>
                         <th>Category</th>
+                        <th>Tags</th>
                         <th style="width: 10px">Created at</th>
                         <th class="col-2">Links</th>
                     </tr>
@@ -39,6 +40,11 @@
                             <td>{{ucfirst($post->title)}}</td>
                             <td>{{Str::limit($post->content, 60)}}</td>
                             <td>{{ $post->category ? $post->category->name : 'No Category' }}</td>
+                            <td>
+                                @foreach ($post->tags as $tag)
+                                    <span class="badge bg-primary">{{ $tag->name }}</span>
+                                @endforeach
+                            </td>
                             <td>{{ $post->createdDate() }}</td>
                             <td class="col-2">
                                 <a class="btn btn-success mb-2 px-5" href="{{ route('admin.posts.show', $post) }}">Show</a>
