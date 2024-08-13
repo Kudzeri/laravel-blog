@@ -10,11 +10,18 @@
             <div class="card-header">
                 <div class="card-title">{{ $post->exists ? 'Update' : 'Create' }} Post</div>
             </div> <!--end::Header--> <!--begin::Form-->
-            <form action="{{ $post->exists ? route('admin.posts.update', $post) : route('admin.posts.store') }}" method="post"> <!--begin::Body-->
+            <form action="{{ $post->exists ? route('admin.posts.update', $post) : route('admin.posts.store') }}" method="post" enctype="multipart/form-data"> <!--begin::Body-->
                 <div class="card-body">
                     <div class="mb-3"> <label for="exampleInputPassword1" class="form-label">Title</label> <input value="{{ old('name', $post->title) }}"  name="title" type="text" class="form-control"> </div>
-                    <div class="input-group"> <span class="input-group-text">Content</span> <textarea name="content" class="form-control" aria-label="With textarea">{{ old('name', $post->content) }}</textarea> </div>
-                    <div class="col-md-6"> <label for="validationCustom04" class="form-label">Category</label> <select name="category_id"  class="form-select">
+                    <div class="input-group mb-3"> <span class="input-group-text">Content</span> <textarea name="content" class="form-control" aria-label="With textarea">{{ old('name', $post->content) }}</textarea> </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" class="form-control" id="image" name="image">
+                        @if($post->image)
+                            <img src="{{ asset('storage/' . $post->image) }}" alt="Image" class="img-thumbnail mt-2" width="150">
+                        @endif
+                    </div>
+                    <div class="col-md-6 mb-3"> <label for="validationCustom04" class="form-label">Category</label> <select name="category_id"  class="form-select">
                             <option value="">No Category</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}"

@@ -1,5 +1,10 @@
 <x-admin>
     <div class="row">
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="col-sm-6">
             <h3 class="mb-5">Post</h3>
         </div>
@@ -16,7 +21,9 @@
                     <tr>
                         <th>Title</th>
                         <th>Content</th>
+                        <th>Image</th>
                         <th>Category</th>
+                        <th>Tags</th>
                         <th>Created at</th>
                     </tr>
                     </thead>
@@ -24,7 +31,19 @@
                     <tr class="align-middle">
                         <td>{{ucfirst($post->title)}}</td>
                         <td>{{Str::limit($post->content, 60)}}</td>
+                        <td>
+                            @if($post->image)
+                                <img src="{{ asset('storage/' . $post->image) }}" alt="Image" class="img-thumbnail" width="100">
+                            @else
+                                <img src="{{ asset('storage/images/noimage.jpg') }}" alt="Image" class="img-thumbnail" width="100">
+                            @endif
+                        </td>
                         <td>{{ $post->category ? $post->category->name : 'No Category' }}</td>
+                        <td>
+                            @foreach ($post->tags as $tag)
+                                <span class="badge bg-primary">{{ $tag->name }}</span>
+                            @endforeach
+                        </td>
                         <td>{{ $post->createdDate() }}</td>
                     </tr>
                     </tbody>

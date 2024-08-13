@@ -13,7 +13,7 @@ class Post extends Model
 
     protected $table = 'posts';
     protected $guarded = ['id'];
-    protected $fillable = ['title','content', 'category_id'];
+    protected $fillable = ['title','content', 'category_id', 'image'];
 
     public function category(): BelongsTo
     {

@@ -40,13 +40,18 @@ class PostController extends Controller
     {
         $validated = $request->validated();
 
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $validated['image'] = $imagePath;
+        }
+
         $post = Post::create($validated);
 
         if (isset($validated['tags'])) {
             $post->tags()->sync($validated['tags']);
         }
 
-        return redirect()->route('admin.posts.index')->with('success', 'Post created successfully.');
+        return redirect()->route('admin.posts.show',compact('post'))->with('success', 'Post created successfully.');
     }
 
     /**
@@ -75,10 +80,18 @@ class PostController extends Controller
     {
         $validated = $request->validated();
 
+        if ($request->hasFile('image')) {
+            if ($post->image) {
+                Storage::disk('public')->delete($post->image);
+            }
+            $imagePath = $request->file('image')->store('images', 'public');
+            $validated['image'] = $imagePath;
+        }
+
         $post->update($validated);
         $post->tags()->sync($request->input('tags', []));
 
-        return redirect()->route('admin.posts.index')->with('success', 'Post updated successfully.');
+        return redirect()->route('admin.posts.show',compact('post'))->with('success', 'Post updated successfully.');
     }
 
     /**
