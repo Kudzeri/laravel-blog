@@ -1,11 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{PostController, CategoryController, TagController, AdminController};
-use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\TagController as AdminTagController;
-use App\Http\Middleware\CheckRoleMiddleware; //Add to Kernel RoutesMiddleware
+use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Route;
+
+//Add to Kernel RoutesMiddleware
 
 Auth::routes();
 
