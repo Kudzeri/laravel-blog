@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\TagController as AdminTagController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\{PostController, CategoryController};
 use Illuminate\Support\Facades\Route;
 
 //Add to Kernel RoutesMiddleware
@@ -15,6 +15,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/', [PostController::class, 'index'])->name('index');
 Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::get('categories',[CategoryController::class, 'index'])->name('categories.index');
+Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
 Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, "index"])->name('admin.index');
