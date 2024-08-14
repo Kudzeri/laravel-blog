@@ -19,14 +19,16 @@
                                                 </div>
                                             @endif
                                         </div>
-                                        <p class="blog-post-category">{{ $post->category->name ?? 'Uncategorized' }}</p>
+                                        <p class="blog-post-category">| {{ $post->category->name ?? 'Uncategorized' }} | {{$post->createdDate()}}</p>
                                         <a href="{{ route('posts.show', $post) }}" class="blog-post-permalink">
                                             <h6 class="blog-post-title">{{ $post->title }}</h6>
                                         </a>
+
                                     </div>
                                 @endforeach
                             </div>
                         @endforeach
+                        {{$posts->links('components.pagination')}}
                     </section>
                 </div>
             </div>
