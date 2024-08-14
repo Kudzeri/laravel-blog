@@ -14,6 +14,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/', [PostController::class, 'index'])->name('index');
+Route::get('/{id}', [PostController::class, 'show'])->name('posts.show');
 
 Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, "index"])->name('admin.index');
