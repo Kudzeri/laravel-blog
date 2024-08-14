@@ -7,16 +7,26 @@
         <div class="collapse navbar-collapse" id="edicaMainNav">
             <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{route('index')}}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{route('index')}}">Home</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{route('categories.index')}}">Categories</a>
+
                 </li>
             </ul>
             <ul class="navbar-nav mt-2 mt-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="#"><span class="flag-icon flag-icon-squared rounded-circle flag-icon-gb"></span> Eng</a>
                 </li>
-                @auth
+                @can('viewAdminDashboard', Auth::user())
+                    <a href="{{ route('admin.index') }}" class="btn btn-primary">Admin Dashboard</a>
+                @endcan
+            @auth
                     <form action="{{ route('logout') }}" method="POST" style="display:inline;">
                         @csrf
+                        @if(Auth::user()->role === 'admin')
+                            <a href="{{ route('admin.index') }}" class="btn btn-primary">Admin Panel</a>
+                        @endif
                         <button type="submit" class="btn btn-danger">Logout</button>
                     </form>
                 @else
