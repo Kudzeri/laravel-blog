@@ -29,7 +29,7 @@
                     </section>
                 </div>
             </div>
-
+            <a class="btn btn-warning mb-2 px-5 col-12 text-white" href="{{route('categories.index')}}">Back</a>
         </div>
 
     </main>

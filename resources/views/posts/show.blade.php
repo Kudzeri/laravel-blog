@@ -12,7 +12,32 @@
                         <p class="text-break">{{$post->content}}</p>
                     </div>
                 </div>
+                <div class="mx-auto">
+                    <span class="like-count mr-3">{{ $post->likes->count() }} likes</span>
 
+                    @auth
+                        @php
+                            $userLiked = $post->likes->contains('user_id', auth()->id());
+                        @endphp
+
+                        @if($userLiked)
+                            <form action="{{ route('posts.unlike', $post) }}" method="POST" class="mr-2 mx-auto">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Unlike</button>
+                            </form>
+                        @else
+                            <form action="{{ route('posts.like', $post) }}" method="POST" class="mr-2 mx-auto">
+                                @csrf
+                                <button type="submit" class="btn btn-primary btn-sm">Like</button>
+                            </form>
+                        @endif
+                    @endauth
+
+                    @guest
+                        <p class="text-muted">Please <a href="{{ route('login') }}">log in</a> to like this post.</p>
+                    @endguest
+                </div>
                 <a class="btn btn-warning mb-2 px-5 col-12 text-white" href="{{route('index')}}">Back</a>
             </section>
 

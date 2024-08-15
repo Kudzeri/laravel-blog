@@ -6,10 +6,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <section>
-                        @foreach ($posts->chunk(2) as $postChunk)
+                        @foreach ($posts->chunk(3) as $postChunk)
                             <div class="row blog-post-row">
                                 @foreach ($postChunk as $post)
-                                    <div class="col-md-6 blog-post aos-init aos-animate" data-aos="fade-up">
+                                    <div class="col-md-4 blog-post aos-init aos-animate" data-aos="fade-up">
                                         <div class="blog-post-thumbnail-wrapper">
                                             @if($post->image)
                                                 <img src="{{ asset('storage/' . $post->image) }}" alt="blog post">
@@ -23,11 +23,35 @@
                                         <a href="{{ route('posts.show', $post) }}" class="blog-post-permalink">
                                             <h6 class="blog-post-title">{{ $post->title }}</h6>
                                         </a>
+                                        <span class="like-count mr-3">{{ $post->likes->count() }} likes</span>
 
+                                        @auth
+                                            @php
+                                                $userLiked = $post->likes->contains('user_id', auth()->id());
+                                            @endphp
+
+                                            @if($userLiked)
+                                                <form action="{{ route('posts.unlike', $post) }}" method="POST" class="mr-2">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">Unlike</button>
+                                                </form>
+                                            @else
+                                                <form action="{{ route('posts.like', $post) }}" method="POST" class="mr-2">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-primary btn-sm">Like</button>
+                                                </form>
+                                            @endif
+                                        @endauth
+
+                                        @guest
+                                            <p class="text-muted">Please <a href="{{ route('login') }}">log in</a> to like this post.</p>
+                                        @endguest
                                     </div>
                                 @endforeach
                             </div>
                         @endforeach
+
                         {{$posts->links('components.pagination')}}
                     </section>
                 </div>

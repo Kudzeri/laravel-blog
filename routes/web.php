@@ -15,8 +15,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/', [PostController::class, 'index'])->name('index');
 Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::post('posts/{post}/like', [PostController::class, 'like'])->name('posts.like');
+Route::delete('posts/{post}/unlike', [PostController::class, 'unlike'])->name('posts.unlike');
 Route::get('categories',[CategoryController::class, 'index'])->name('categories.index');
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+
 
 Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, "index"])->name('admin.index');
