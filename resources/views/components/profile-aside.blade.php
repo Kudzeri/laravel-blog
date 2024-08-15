@@ -18,6 +18,9 @@
                 <li class="nav-item"><a href="{{ route('profile.comments') }}" class="nav-link active"> <i
                             class="nav-icon bi bi-circle"></i>
                         <p>Comments</p>
+                    </a></li><li class="nav-item"><a href="{{ route('profile.favorite') }}" class="nav-link active"> <i
+                            class="nav-icon bi bi-circle"></i>
+                        <p>Favorite Posts</p>
                     </a></li>
                 <li class="nav-item"><a href="{{ route('index') }}" class="nav-link active"> <i
                             class="nav-icon bi bi-circle"></i>

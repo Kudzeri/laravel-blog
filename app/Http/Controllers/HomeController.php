@@ -73,4 +73,11 @@ class HomeController extends Controller
 
         return view('profile.comments', compact('comments'));
     }
+
+    public function favorites()
+    {
+        $favorites = Auth::user()->likes()->OrderBy('created_at','desc')->paginate(5);
+
+        return view('profile.favorite', compact('favorites'));
+    }
 }
