@@ -11,6 +11,10 @@
                             class="nav-icon bi bi-circle"></i>
                         <p>Home</p>
                     </a></li>
+                <li class="nav-item"><a href="{{ route('profile.posts') }}" class="nav-link active"> <i
+                            class="nav-icon bi bi-circle"></i>
+                        <p>Posts</p>
+                    </a></li>
                 <li class="nav-item"><a href="{{ route('index') }}" class="nav-link active"> <i
                             class="nav-icon bi bi-circle"></i>
                         <p>Back to site</p>

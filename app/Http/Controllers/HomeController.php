@@ -58,4 +58,13 @@ class HomeController extends Controller
 
         return redirect()->route('home')->with('success', 'Profile updated successfully.');
     }
+
+    public function posts(){
+        $posts = Auth::user()
+            ->posts()
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+
+        return view('profile.posts', compact('posts'));
+    }
 }
