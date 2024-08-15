@@ -1,23 +1,23 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
+<x-profile-app>
+    <div class="card profile-card mx-auto my-4" style="max-width: 500px;">
+        <div class="card-header text-center">
+            @if ($user->profile_image)
+                <img src="{{ asset('storage/' . $user->profile_image) }}" alt="{{ $user->name }}" class="img-fluid rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+            @else
+                <img src="https://avatars.mds.yandex.net/i?id=9dfc25621de6ebe99451412e9dd57189bcb7ffaf6d2d3382-12940477-images-thumbs&n=13" alt="{{ $user->name }}" class="img-fluid rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+            @endif
+            <h4 class="mt-3">{{ mb_strtoupper($user->name) }}</h4>
+            <p class="text-muted">{{ $user->email }}</p>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush text-center">
+                <li class="list-group-item">Posts: {{ $user->posts->count() }}</li>
+                <li class="list-group-item">Joined: {{ $user->created_at->format('F j, Y') }}</li>
+            </ul>
+            <div class="text-center mt-3">
+                <a href="#" class="btn btn-primary">Edit Profile</a>
             </div>
         </div>
     </div>
-</div>
-@endsection
+
+</x-profile-app>
