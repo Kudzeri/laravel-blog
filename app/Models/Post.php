@@ -31,6 +31,11 @@ class Post extends Model
         return $this->hasMany(Like::class);
     }
 
+    public function comments():HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function createdDate()
     {
         return $this->created_at->format('d.m.Y H:i');
