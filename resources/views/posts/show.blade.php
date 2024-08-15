@@ -20,7 +20,7 @@
             @endif
 
             <h1 class="edica-page-title aos-init aos-animate" data-aos="fade-up">{{ $post->title }}</h1>
-            <p class="edica-blog-post-meta aos-init aos-animate" data-aos="fade-up" data-aos-delay="200"> • Created at: {{ $post->createdDate() }} • </p>
+            <p class="edica-blog-post-meta aos-init aos-animate" data-aos="fade-up" data-aos-delay="200"> • Author: {{$post->author->name}} • Created at: {{ $post->createdDate() }} • </p>
             <section class="blog-post-featured-img aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
                 <img src="@if($post->image == '') {{ asset('storage/images/noimage.jpg') }} @else {{ asset('storage/' . $post->image) }} @endif" alt="featured image" class="w-100">
             </section>

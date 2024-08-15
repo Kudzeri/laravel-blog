@@ -19,7 +19,7 @@
                                                 </div>
                                             @endif
                                         </div>
-                                        <p class="blog-post-category">| {{ $post->category->name ?? 'Uncategorized' }} | {{$post->createdDate()}}</p>
+                                        <p class="blog-post-category">| {{ $post->category->name ?? 'Uncategorized' }} | {{$post->author->name}} | {{$post->created_at->diff}}</p>
                                         <a href="{{ route('posts.show', $post) }}" class="blog-post-permalink">
                                             <h6 class="blog-post-title">{{ $post->title }}</h6>
                                         </a>
