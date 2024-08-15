@@ -27,6 +27,7 @@
                         @if(Auth::user()->role === 'admin')
                             <a href="{{ route('admin.index') }}" class="btn btn-primary">Admin Panel</a>
                         @endif
+                        <a href="{{ route('home') }}" class="btn btn-success mx-2">Profile</a>
                         <button type="submit" class="btn btn-danger">Logout</button>
                     </form>
                 @else

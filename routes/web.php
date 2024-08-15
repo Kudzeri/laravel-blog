@@ -4,14 +4,19 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\TagController as AdminTagController;
-use App\Http\Controllers\{CommentController, PostController, CategoryController};
+use App\Http\Controllers\{CommentController, HomeController, PostController, CategoryController};
 use Illuminate\Support\Facades\Route;
 
 //Add to Kernel RoutesMiddleware
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/profile/edit', [HomeController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile/update', [HomeController::class, 'update'])->name('profile.update');
+});
 
 Route::get('/', [PostController::class, 'index'])->name('index');
 

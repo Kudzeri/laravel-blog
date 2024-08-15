@@ -1,5 +1,5 @@
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark"> <!--begin::Sidebar Brand-->
-    <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="{{ route('admin.index') }}" class="brand-link"> <!--begin::Brand Image-->
+    <div class="sidebar-brand"> <!--begin::Brand Link--> <a href="{{ route('home') }}" class="brand-link"> <!--begin::Brand Image-->
             <img src="{{asset('dist/assets/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
                  class="brand-image opacity-75 shadow"> <!--end::Brand Image--> <!--begin::Brand Text--> <span
                 class="brand-text fw-light">User Profile</span> <!--end::Brand Text--> </a> <!--end::Brand Link--> </div>

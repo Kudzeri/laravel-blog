@@ -1,4 +1,12 @@
 <x-profile-app>
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="card profile-card mx-auto my-4" style="max-width: 500px;">
         <div class="card-header text-center">
             @if ($user->profile_image)
@@ -15,7 +23,7 @@
                 <li class="list-group-item">Joined: {{ $user->created_at->format('F j, Y') }}</li>
             </ul>
             <div class="text-center mt-3">
-                <a href="#" class="btn btn-primary">Edit Profile</a>
+                <a href="{{route('profile.edit')}}" class="btn btn-primary">Edit Profile</a>
             </div>
         </div>
     </div>
