@@ -8,7 +8,10 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Jobs\ProcessPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -39,6 +42,7 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $validated = $request->validated();
+        $validated['author_id'] = Auth::id();
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
@@ -51,8 +55,11 @@ class PostController extends Controller
             $post->tags()->sync($validated['tags']);
         }
 
-        return redirect()->route('admin.posts.show',compact('post'))->with('success', 'Post created successfully.');
+        ProcessPost::dispatch($post);
+
+        return redirect()->route('admin.posts.show', compact('post'))->with('success', 'Post created successfully.');
     }
+
 
     /**
      * Display the specified resource.

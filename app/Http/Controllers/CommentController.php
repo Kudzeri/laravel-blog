@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCommentRequest;
+use App\Jobs\ProcessComment;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -14,11 +15,13 @@ class CommentController extends Controller
         $validated = $request->validated();
 
         if (auth()->check()) {
-            $comment = new Comment();
-            $comment->body = $request->body;
-            $comment->user_id = auth()->id(); // Устанавливаем user_id
-            $comment->post_id = $post->id; // Устанавливаем post_id
-            $comment->save();
+            $data = [
+                'body' => $validated['body'],
+                'user_id' => auth()->id(),
+                'post_id' => $post->id,
+            ];
+
+            ProcessComment::dispatch($data);
 
             return back()->with('success', 'Comment added successfully!');
         }
