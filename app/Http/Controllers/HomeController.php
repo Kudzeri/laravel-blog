@@ -67,4 +67,10 @@ class HomeController extends Controller
 
         return view('profile.posts', compact('posts'));
     }
+
+    public function comments(){
+        $comments = Auth::user()->comments()->OrderBy('created_at','desc')->paginate(5);
+
+        return view('profile.comments', compact('comments'));
+    }
 }

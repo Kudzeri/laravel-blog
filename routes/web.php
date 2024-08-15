@@ -17,6 +17,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [HomeController::class, 'edit'])->name('profile.edit');
     Route::post('/profile/update', [HomeController::class, 'update'])->name('profile.update');
     Route::get('/profile/posts', [HomeController::class, 'posts'])->name('profile.posts');
+    Route::get('/profile/comments', [HomeController::class, 'comments'])->name('profile.comments');
 });
 
 Route::get('/', [PostController::class, 'index'])->name('index');
